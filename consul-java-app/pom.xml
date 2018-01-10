@@ -44,6 +44,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!--Netflix Archaius-->
+		<dependency>
+			<groupId>com.netflix.archaius</groupId>
+			<artifactId>archaius-core</artifactId>
+			<version>0.6.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -51,6 +58,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<outputDirectory>${basedir}/docker/app</outputDirectory>
+					<finalName>consul-app</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
