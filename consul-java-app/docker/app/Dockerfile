@@ -2,7 +2,8 @@ FROM develar/java
 
 MAINTAINER David Cuellar, davidokun99@gmail.com
 
-COPY consul-app.jar /usr/local/consul-app.jar
-WORKDIR /usr/local/
+RUN mkdir /usr/local/consul-app
 
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=qa", "consul-app.jar", "--acceptLicense", "/usr/local/"]
+WORKDIR /usr/local/consul-app
+
+ENTRYPOINT ["java", "-jar", "consul-app.jar", "--acceptLicense", "/usr/local/consul-app"]
