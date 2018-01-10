@@ -22,6 +22,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<consul.api.version>1.3.0</consul.api.version>
+		<archaius.core.version>0.6.0</archaius.core.version>
 	</properties>
 
 	<dependencies>
@@ -49,7 +51,14 @@
 		<dependency>
 			<groupId>com.netflix.archaius</groupId>
 			<artifactId>archaius-core</artifactId>
-			<version>0.6.0</version>
+			<version>${archaius.core.version}</version>
+		</dependency>
+
+		<!--Consul Api Client-->
+		<dependency>
+			<groupId>com.ecwid.consul</groupId>
+			<artifactId>consul-api</artifactId>
+			<version>${consul.api.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -59,7 +68,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<outputDirectory>${basedir}/docker/app</outputDirectory>
 					<finalName>consul-app</finalName>
 				</configuration>
 			</plugin>
