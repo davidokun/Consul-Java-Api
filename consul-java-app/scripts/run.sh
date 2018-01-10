@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-mvn install && docker restart docker_app_1
+docker stop docker_app_1 && mvn clean install && docker start docker_app_1

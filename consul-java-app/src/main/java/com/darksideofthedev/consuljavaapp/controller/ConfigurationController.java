@@ -1,6 +1,7 @@
 package com.darksideofthedev.consuljavaapp.controller;
 
-import com.darksideofthedev.consuljavaapp.model.AppConsulConfiguration;
+import com.darksideofthedev.consuljavaapp.model.AppConfiguration;
+import com.darksideofthedev.consuljavaapp.service.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConfigurationController {
 
     @Autowired
-    private AppConsulConfiguration appConsulConfiguration;
+    private AppConfiguration appConfiguration;
+
+    @Autowired
+    private ConfigService configService;
 
     @GetMapping("config")
-    public ResponseEntity<AppConsulConfiguration> getConfiguration() {
-        return new ResponseEntity<>(appConsulConfiguration, HttpStatus.OK);
+    public ResponseEntity<AppConfiguration> getConfiguration() {
+
+        configService.updateBeanConsfiguration();
+        return new ResponseEntity<>(appConfiguration, HttpStatus.OK);
     }
 }

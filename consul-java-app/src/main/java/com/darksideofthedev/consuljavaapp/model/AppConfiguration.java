@@ -3,7 +3,7 @@ package com.darksideofthedev.consuljavaapp.model;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AppConsulConfiguration {
+public class AppConfiguration {
 
     private int timeToLive;
 
