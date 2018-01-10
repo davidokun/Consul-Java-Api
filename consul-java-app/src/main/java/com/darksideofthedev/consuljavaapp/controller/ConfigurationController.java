@@ -22,7 +22,6 @@ public class ConfigurationController {
     @GetMapping("config")
     public ResponseEntity<AppConfiguration> getConfiguration() {
 
-        configService.updateBeanConsfiguration();
         return new ResponseEntity<>(appConfiguration, HttpStatus.OK);
     }
 }

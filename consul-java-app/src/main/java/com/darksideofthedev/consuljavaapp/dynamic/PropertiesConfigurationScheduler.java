@@ -10,12 +10,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class PropertiesConfigurationScheduler extends AbstractPollingScheduler {
 
-    private ScheduledExecutorService executorService;
+    private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
     @Override
     protected void schedule(Runnable pollingRunnable) {
-
-        executorService = Executors.newScheduledThreadPool(1);
         executorService.scheduleAtFixedRate(pollingRunnable, 0, 10, TimeUnit.SECONDS);
     }
 

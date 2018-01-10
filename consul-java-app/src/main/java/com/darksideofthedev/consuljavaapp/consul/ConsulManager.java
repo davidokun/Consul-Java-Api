@@ -38,7 +38,7 @@ public class ConsulManager {
     public Map<String, Object> getProperties() {
 
         Map<String, Object> map = new HashMap<>();
-        client.getKVValues(consulPath).getValue().forEach(v -> map.put(v.getKey(), v.getDecodedValue()));
+        client.getKVValues(consulPath).getValue().forEach(v -> map.put(v.getKey().replace(consulPath, ""), v.getDecodedValue()));
 
         return map;
 

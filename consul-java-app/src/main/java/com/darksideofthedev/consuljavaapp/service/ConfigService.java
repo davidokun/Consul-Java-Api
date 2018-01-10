@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 
 @Service
-public class ConfigService {
+public class ConfigService implements Runnable {
 
     @Autowired
     private AppConfiguration appConfiguration;
@@ -19,10 +19,15 @@ public class ConfigService {
     @PostConstruct
     public void init() {
 
-        ttl = DynamicPropertyFactory.getInstance().getIntProperty("couchbase.ttl", 11);
+        ttl = DynamicPropertyFactory.getInstance().getIntProperty("couchbase.ttl", 11, this);
     }
 
-    public void updateBeanConsfiguration() {
+    public void updateBeanConfiguration() {
         appConfiguration.setTimeToLive(ttl.get());
+    }
+
+    @Override
+    public void run() {
+        updateBeanConfiguration();
     }
 }
