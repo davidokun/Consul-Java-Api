@@ -1,8 +1,8 @@
 package com.darksideofthedev.consuljavaapp.service;
 
-import com.darksideofthedev.consuljavaapp.model.AppConfiguration;
-import com.netflix.config.DynamicIntProperty;
-import com.netflix.config.DynamicPropertyFactory;
+import com.darksideofthedev.consuljavaapp.model.Employee;
+import com.darksideofthedev.consuljavaapp.util.DefaultPropertiesNames;
+import com.netflix.config.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +12,39 @@ import javax.annotation.PostConstruct;
 public class ConfigService implements Runnable {
 
     @Autowired
-    private AppConfiguration appConfiguration;
+    private Employee employee;
 
-    private DynamicIntProperty ttl;
+    private DynamicIntProperty id;
+    private DynamicStringProperty firstName;
+    private DynamicStringProperty lastName;
+    private DynamicLongProperty phoneNumber;
+    private DynamicStringProperty address;
 
     @PostConstruct
     public void init() {
 
-        ttl = DynamicPropertyFactory.getInstance().getIntProperty("couchbase.ttl", 11, this);
+        id = DynamicPropertyFactory.getInstance()
+                .getIntProperty(DefaultPropertiesNames.EMPLOYEE_ID.getName(), 11, this);
+
+        firstName = DynamicPropertyFactory.getInstance()
+                .getStringProperty(DefaultPropertiesNames.EMPLOYEE_FIRST_NAME.getName(), "John", this);
+
+        lastName = DynamicPropertyFactory.getInstance()
+                .getStringProperty(DefaultPropertiesNames.EMPLOYEE_LAST_NAME.getName(), "Doe", this);
+
+        phoneNumber = DynamicPropertyFactory.getInstance()
+                .getLongProperty(DefaultPropertiesNames.EMPLOYEE_PHONE_NUMBER.getName(), 555123, this);
+
+        address = DynamicPropertyFactory.getInstance()
+                .getStringProperty(DefaultPropertiesNames.EMPLOYEE_ADDRESS.getName(), "Fake Street 1", this);
     }
 
-    public void updateBeanConfiguration() {
-        appConfiguration.setTimeToLive(ttl.get());
+    private void updateBeanConfiguration() {
+        employee.setId(id.get());
+        employee.setFirstName(firstName.get());
+        employee.setLastName(lastName.get());
+        employee.setPhoneNumber(phoneNumber.get());
+        employee.setAddress(address.get());
     }
 
     @Override
